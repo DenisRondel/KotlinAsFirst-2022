@@ -3,6 +3,7 @@
 package lesson2.task1
 
 import lesson1.task1.discriminant
+import lesson1.task1.sqr
 import kotlin.math.max
 import kotlin.math.sqrt
 
@@ -93,7 +94,7 @@ fun timeForHalfWay(
     return when {
         t1 * v1 >= halfOfTheWay -> halfOfTheWay / v1
         t2 * v2 + t1 * v1 >= halfOfTheWay -> (halfOfTheWay - t1 * v1) / v2 + t1
-        else -> (halfOfTheWay - t1 * v1 - t2 * v2) / v3 + t1
+        else -> (halfOfTheWay - t1 * v1 - t2 * v2) / v3 + t1 + t2
     }
 }
 
@@ -134,7 +135,7 @@ fun rookOrBishopThreatens(
     rookX: Int, rookY: Int,
     bishopX: Int, bishopY: Int
 ): Int {
-    return when {
+    return when { // не решил с слоном
         (kingX == rookX || kingY == rookY) && (kingX + kingY == bishopX + bishopY) -> 3
         kingX == rookX || kingY == rookY -> 1
         kingX + kingY == bishopX + bishopY -> 2
@@ -150,7 +151,15 @@ fun rookOrBishopThreatens(
  * прямоугольным (вернуть 1) или тупоугольным (вернуть 2).
  * Если такой треугольник не существует, вернуть -1.
  */
-fun triangleKind(a: Double, b: Double, c: Double): Int = TODO()
+fun triangleKind(a: Double, b: Double, c: Double): Int {
+    return when {
+        a + b < c || b + c < a || c + a < b -> -1
+        sqr(a) == sqr(c) + sqr(b) || sqr(c) == sqr(b) + sqr(a) || sqr(b) == sqr(c) + sqr(a) -> 1
+        sqr(b) + sqr(c) - sqr(a) < 0 || sqr(a) + sqr(c) - sqr(b) < 0 || sqr(b) + sqr(a) - sqr(c) < 0 -> 2
+        else -> 0
+    }
+
+}
 
 /**
  * Средняя (3 балла)
@@ -160,4 +169,13 @@ fun triangleKind(a: Double, b: Double, c: Double): Int = TODO()
  * Найти длину пересечения отрезков AB и CD.
  * Если пересечения нет, вернуть -1.
  */
-fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int = TODO()
+fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int {
+    return when {
+        b < c || d < a -> -1
+        c <= a && d >= b -> b - a
+        c <= a && d <= b -> d - a
+        c >= a && d >= b -> b - c
+        c >= a && d <= b -> d - c
+        else -> 999
+    }
+}
