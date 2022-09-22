@@ -135,10 +135,10 @@ fun rookOrBishopThreatens(
     rookX: Int, rookY: Int,
     bishopX: Int, bishopY: Int
 ): Int {
-    return when { // не решил с слоном
-        (kingX == rookX || kingY == rookY) && (kingX + kingY == bishopX + bishopY) -> 3
+    return when {
+        (kingX == rookX || kingY == rookY) && (kingX + kingY == bishopX + bishopY) || (kingX - bishopX) == (kingY - bishopY) -> 3
         kingX == rookX || kingY == rookY -> 1
-        kingX + kingY == bishopX + bishopY -> 2
+        (kingX + kingY == bishopX + bishopY) || (kingX - bishopX) == (kingY - bishopY) -> 2
         else -> 0
     }
 }
