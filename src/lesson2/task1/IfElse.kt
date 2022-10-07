@@ -1,9 +1,8 @@
-@file:Suppress("UNUSED_PARAMETER", "UNREACHABLE_CODE")
+@file:Suppress("UNUSED_PARAMETER")
 
 package lesson2.task1
 
 import lesson1.task1.discriminant
-import lesson1.task1.sqr
 import kotlin.math.max
 import kotlin.math.sqrt
 
@@ -71,8 +70,7 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
  */
 fun ageDescription(age: Int): String {
     return when {
-        age / 10 % 10 == 1 -> "$age лет"
-        age / 10 % 10 == 9 -> "$age лет"
+        age % 100 in 11..20 || age % 10 == 0 || age % 10 in 5..9 -> "$age лет"
         age % 10 == 1 -> "$age год"
         else -> "$age года"
     }
@@ -134,14 +132,7 @@ fun rookOrBishopThreatens(
     kingX: Int, kingY: Int,
     rookX: Int, rookY: Int,
     bishopX: Int, bishopY: Int
-): Int {
-    return when {
-        (kingX == rookX || kingY == rookY) && (kingX + kingY == bishopX + bishopY) || (kingX - bishopX) == (kingY - bishopY) -> 3
-        kingX == rookX || kingY == rookY -> 1
-        (kingX + kingY == bishopX + bishopY) || (kingX - bishopX) == (kingY - bishopY) -> 2
-        else -> 0
-    }
-}
+): Int = TODO()
 
 /**
  * Простая (2 балла)
@@ -151,15 +142,7 @@ fun rookOrBishopThreatens(
  * прямоугольным (вернуть 1) или тупоугольным (вернуть 2).
  * Если такой треугольник не существует, вернуть -1.
  */
-fun triangleKind(a: Double, b: Double, c: Double): Int {
-    return when {
-        a + b < c || b + c < a || c + a < b -> -1
-        sqr(a) == sqr(c) + sqr(b) || sqr(c) == sqr(b) + sqr(a) || sqr(b) == sqr(c) + sqr(a) -> 1
-        sqr(b) + sqr(c) - sqr(a) < 0 || sqr(a) + sqr(c) - sqr(b) < 0 || sqr(b) + sqr(a) - sqr(c) < 0 -> 2
-        else -> 0
-    }
-
-}
+fun triangleKind(a: Double, b: Double, c: Double): Int = TODO()
 
 /**
  * Средняя (3 балла)
@@ -173,9 +156,9 @@ fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int {
     return when {
         b < c || d < a -> -1
         c <= a && d >= b -> b - a
-        c <= a && d <= b -> d - a
-        c >= a && d >= b -> b - c
-        c >= a && d <= b -> d - c
-        else -> 999
+        c <= a -> d - a
+        d >= b -> b - c
+        else -> d - c
     }
 }
+

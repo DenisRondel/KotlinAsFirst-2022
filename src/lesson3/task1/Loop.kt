@@ -72,29 +72,61 @@ fun digitCountInNumber(n: Int, m: Int): Int =
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun digitNumber(n: Int): Int = TODO()
-
+fun digitNumber(n: Int): Int {
+    var i = 1
+    var number = n
+    while (number / 10 != 0) {
+        i += 1
+        number /= 10
+    }
+    return i
+}
 /**
  * Простая (2 балла)
  *
  * Найти число Фибоначчи из ряда 1, 1, 2, 3, 5, 8, 13, 21, ... с номером n.
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
-fun fib(n: Int): Int = TODO()
+fun fib(n: Int): Int {
+    var first = 1
+    var second = 1
+    var fib = 0
+    var i = 2
+    if (n in 1..2) return 1
+    while (i < n) {
+        i += 1
+        fib = second + first
+        first = second
+        second = fib
+    }
+    return second
+}
 
 /**
  * Простая (2 балла)
  *
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
-fun minDivisor(n: Int): Int = TODO()
+fun minDivisor(n: Int): Int {
+    var i: Int = 2
+    while (n % i != 0) {
+        i += 1
+    }
+    return i
+}
 
 /**
  * Простая (2 балла)
  *
  * Для заданного числа n > 1 найти максимальный делитель, меньший n
  */
-fun maxDivisor(n: Int): Int = TODO()
+fun maxDivisor(n: Int): Int {
+    var i = n/2
+    while (n % i != 0) {
+        i -= 1
+    }
+    return i
+}
 
 /**
  * Простая (2 балла)
@@ -112,7 +144,19 @@ fun maxDivisor(n: Int): Int = TODO()
  * Написать функцию, которая находит, сколько шагов требуется для
  * этого для какого-либо начального X > 0.
  */
-fun collatzSteps(x: Int): Int = TODO()
+fun collatzSteps(x: Int): Int {
+    var xnext = x
+    var i = 0
+    while (xnext != 1) {
+        if (xnext % 2 == 1) {
+            xnext = 3 * xnext + 1
+            i++
+        }
+        xnext /= 2
+        i++
+    }
+    return i
+}
 
 /**
  * Средняя (3 балла)
@@ -120,7 +164,13 @@ fun collatzSteps(x: Int): Int = TODO()
  * Для заданных чисел m и n найти наименьшее общее кратное, то есть,
  * минимальное число k, которое делится и на m и на n без остатка
  */
-fun lcm(m: Int, n: Int): Int = TODO()
+fun lcm(m: Int, n: Int): Int {
+    var d = 2
+    while (d % m != 0 || d % n != 0) {
+        d += 1
+    }
+    return d
+}
 
 /**
  * Средняя (3 балла)
@@ -131,6 +181,7 @@ fun lcm(m: Int, n: Int): Int = TODO()
  */
 fun isCoPrime(m: Int, n: Int): Boolean = TODO()
 
+
 /**
  * Средняя (3 балла)
  *
@@ -138,7 +189,24 @@ fun isCoPrime(m: Int, n: Int): Boolean = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun revert(n: Int): Int = TODO()
+fun revert(n: Int): Int {
+    var del = 1
+    var last = 1
+    var number = 0
+    var result = 0
+    var nn = n
+    while (n % del != n) {
+        del *= 10
+    }
+    while (del != 1) {
+        del /= 10
+        last = nn % 10
+        nn /= 10
+        number = last * del
+        result += number
+    }
+    return result
+}
 
 /**
  * Средняя (3 балла)

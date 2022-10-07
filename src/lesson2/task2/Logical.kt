@@ -3,6 +3,8 @@
 package lesson2.task2
 
 import lesson1.task1.sqr
+import java.lang.Math.abs
+import java.lang.Math.sqrt
 
 /**
  * Пример
@@ -27,8 +29,8 @@ fun isNumberHappy(number: Int): Boolean = (number % 10 + number % 100 / 10) == (
  * Определить, угрожают ли они друг другу. Вернуть true, если угрожают.
  * Считать, что ферзи не могут загораживать друг друга.
  */
-fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean = TODO()
-// я не умею :(((((
+fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean =
+    (x1 == x2 || y1 == y2) || (x1 + y1 == x2 + y2) || abs(x1 - x2) == abs(y1 - y2)
 
 /**
  * Простая (2 балла)
@@ -36,14 +38,7 @@ fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean = TODO()
  * Дан номер месяца (от 1 до 12 включительно) и год (положительный).
  * Вернуть число дней в этом месяце этого года по григорианскому календарю.
  */
-fun daysInMonth(month: Int, year: Int): Int {
-    return when {
-        (year % 4 == 0 || year % 1000 != 0) || (year % 1000 == 400) && month == 2 -> 29
-        month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12 -> 31
-        month == 2 -> 28
-        else -> 30
-    }
-}
+fun daysInMonth(month: Int, year: Int): Int = TODO()
 
 /**
  * Простая (2 балла)
@@ -55,7 +50,13 @@ fun daysInMonth(month: Int, year: Int): Int {
 fun circleInside(
     x1: Double, y1: Double, r1: Double,
     x2: Double, y2: Double, r2: Double
-): Boolean = TODO()
+): Boolean {
+    return when {
+        r1 > r2 -> false
+        (sqrt(sqr(x1 - x2) + sqr(y1 - y2))) <= r2 - r1 -> true
+        else -> false
+    }
+}
 
 /**
  * Средняя (3 балла)
@@ -66,4 +67,12 @@ fun circleInside(
  * кирпич 4 х 4 х 4 пройдёт через отверстие 4 х 4.
  * Вернуть true, если кирпич пройдёт
  */
-fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean = TODO()
+fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean {
+    return when {
+        a <= r && (b <= s || c <= s) -> true
+        a <= s && (b <= r || c <= r) -> true
+        b <= r && c <= s -> true
+        b <= s && c <= r -> true
+        else -> false
+    }
+}
