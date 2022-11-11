@@ -53,7 +53,7 @@ fun circleInside(
 ): Boolean {
     return when {
         r1 > r2 -> false
-        (sqrt(sqr(x1 - x2) + sqr(y1 - y2))) <= r2 - r1 -> true
+        sqrt(sqr(x1 - x2) + sqr(y1 - y2)) <= r2 - r1 -> true
         else -> false
     }
 }

@@ -108,8 +108,8 @@ fun fib(n: Int): Int {
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
 fun minDivisor(n: Int): Int {
-    var i: Int = 2
-    while (n % i != 0) {
+    var i = 2
+    while (n % i != 0 && i <= n) {
         i += 1
     }
     return i
@@ -165,13 +165,17 @@ fun collatzSteps(x: Int): Int {
  * минимальное число k, которое делится и на m и на n без остатка
  */
 fun lcm(m: Int, n: Int): Int {
-    var d = 1
-    while (d % m != 0 || d % n != 0) {
-        d += 1
+    var a = m
+    var b = n
+    if (a == b) return a
+    while (a != 0 && b != 0) {
+        if (a > b) {
+            a %= b
+        } else b %= a
     }
-    return d
+    val gcd = a + b
+    return m / gcd * n
 }
-
 /**
  * Средняя (3 балла)
  *

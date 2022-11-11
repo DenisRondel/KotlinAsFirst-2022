@@ -96,7 +96,17 @@ fun buildWordSet(text: List<String>): MutableSet<String> {
  *   buildGrades(mapOf("Марат" to 3, "Семён" to 5, "Михаил" to 5))
  *     -> mapOf(5 to listOf("Семён", "Михаил"), 3 to listOf("Марат"))
  */
-fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> = TODO()
+fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> {
+    val result = mutableMapOf<Int, List<String>>()
+    for (i in grades) { // можно было через for ((name, grade) in grades) и вставлять вместо i, но когда это писал, был не такой крутой))))
+        if (result[i.value] == null) {
+            result[i.value] = mutableListOf(i.key)
+        } else {
+            result[i.value] = result.getValue(i.value) + i.key
+        }
+    }
+    return result
+}
 
 /**
  * Простая (2 балла)
@@ -108,7 +118,7 @@ fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> = TODO()
  *   containsIn(mapOf("a" to "z"), mapOf("a" to "z", "b" to "sweet")) -> true
  *   containsIn(mapOf("a" to "z"), mapOf("a" to "zee", "b" to "sweet")) -> false
  */
-fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean = TODO()
+fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean = !(b + a != b && a + b != a)
 
 /**
  * Простая (2 балла)
@@ -155,6 +165,7 @@ fun whoAreInBoth(a: List<String>, b: List<String>): List<String> = TODO()
  *   ) -> mapOf("Emergency" to "112, 911", "Police" to "02")
  */
 fun mergePhoneBooks(mapA: Map<String, String>, mapB: Map<String, String>): Map<String, String> = TODO()
+
 
 /**
  * Средняя (4 балла)
@@ -208,7 +219,13 @@ fun canBuildFrom(chars: List<Char>, word: String): Boolean = TODO()
  * Например:
  *   extractRepeats(listOf("a", "b", "a")) -> mapOf("a" to 2)
  */
-fun extractRepeats(list: List<String>): Map<String, Int> = TODO()
+fun extractRepeats(list: List<String>): Map<String, Int> {
+    val mapA = mutableMapOf<String, Int>()
+    for (i in list) {
+        mapA[i] = mapA.getOrDefault(i, 0) + 1
+    }
+    return mapA.filterValues { it != 1 }
+}
 
 /**
  * Средняя (3 балла)
