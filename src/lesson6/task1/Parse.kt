@@ -104,6 +104,15 @@ fun dateDigitToStr(digital: String): String = TODO()
  */
 fun flattenPhoneNumber(phone: String): String = TODO()
 
+
+
+
+
+
+fun isNumber(s: String?): Boolean { // Проверка на число
+    return !s.isNullOrEmpty() && s.matches(Regex("\\d+"))
+}
+
 /**
  * Средняя (5 баллов)
  *
@@ -114,7 +123,16 @@ fun flattenPhoneNumber(phone: String): String = TODO()
  * Прочитать строку и вернуть максимальное присутствующее в ней число (717 в примере).
  * При нарушении формата входной строки или при отсутствии в ней чисел, вернуть -1.
  */
-fun bestLongJump(jumps: String): Int = TODO()
+fun bestLongJump(jumps: String): Int {
+    val filter1 = jumps.replace("%", ",")
+    val filter2 = filter1.replace("-", ",")
+    val filter4 = filter2.replace(" ", "")
+    val filter3: List<String> = filter4.split(",").toList()
+    val max = filter3.max()
+    val result = max.replace(" ", "")
+    return if (isNumber(result)) result.toInt()
+    else -1
+}
 
 /**
  * Сложная (6 баллов)
@@ -127,7 +145,21 @@ fun bestLongJump(jumps: String): Int = TODO()
  * При нарушении формата входной строки, а также в случае отсутствия удачных попыток,
  * вернуть -1.
  */
-fun bestHighJump(jumps: String): Int = TODO()
+fun bestHighJump(jumps: String): Int {
+    val list = mutableListOf<String>()
+    val filter1 = jumps.replace("+", ",")
+    val filter2 = filter1.replace("-", ",")
+    val filter4 = filter2.replace(" ", "")
+    val filter3: List<String> = filter4.split(",").toList()
+    for (i in filter3) {
+        if (isNumber(i)) list.add(i)
+    }
+    if (list.isEmpty()) return -1
+    val max = list.max()
+    val result = max.replace(" ", "")
+    return if (isNumber(result)) result.toInt()
+    else -1
+}
 
 /**
  * Сложная (6 баллов)
@@ -145,11 +177,15 @@ fun plusMinus(expression: String): Int = TODO()
  *
  * Строка состоит из набора слов, отделённых друг от друга одним пробелом.
  * Определить, имеются ли в строке повторяющиеся слова, идущие друг за другом.
- * Слова, отличающиеся только регистром, считать совпадающими.
+ * Слова, отличающиеся только x, считать совпадающими.
  * Вернуть индекс начала первого повторяющегося слова, или -1, если повторов нет.
  * Пример: "Он пошёл в в школу" => результат 9 (индекс первого 'в')
  */
 fun firstDuplicateIndex(str: String): Int = TODO()
+//    val word = str.lowercase()
+//    val list: List<String> = word.split(" ").toList()
+//    if (list.size > 1)
+//}
 
 /**
  * Сложная (6 баллов)

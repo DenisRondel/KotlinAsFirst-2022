@@ -119,6 +119,10 @@ fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> {
  *   containsIn(mapOf("a" to "z"), mapOf("a" to "zee", "b" to "sweet")) -> false
  */
 fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean = !(b + a != b && a + b != a)
+// ДЕНИС, ИСПРАВЬ ЗАДАЧКУ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+//!!!!!!!!1
+//!!!!!!!!
+//11!!!!!!!
 
 /**
  * Простая (2 балла)
