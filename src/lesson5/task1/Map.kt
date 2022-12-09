@@ -119,10 +119,7 @@ fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> {
  *   containsIn(mapOf("a" to "z"), mapOf("a" to "zee", "b" to "sweet")) -> false
  */
 fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean = !(b + a != b && a + b != a)
-// ДЕНИС, ИСПРАВЬ ЗАДАЧКУ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-//!!!!!!!!1
-//!!!!!!!!
-//11!!!!!!!
+
 
 /**
  * Простая (2 балла)
@@ -299,6 +296,24 @@ fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<Stri
  *   findSumOfTwo(listOf(1, 2, 3), 6) -> Pair(-1, -1)
  */
 fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> = TODO()
+//    var i = 0
+//    var a = 1
+//    var mutlist = mutableListOf<Int>()
+//    while (list[i] + list[a] != number || i < list.size - 1) {
+//        if (a < list.size - 1) a += 1
+//        else {
+//            a = 0
+//            i += 1
+//        }
+//    }
+//    var otwet = -1 to -1
+//    if (list[i] + list[a] == number) {
+//        mutlist.add(list[a], list[i])
+//        mutlist = mutlist.sorted() as MutableList<Int>
+//        otwet = mutlist[0] to mutlist [1]
+//        return otwet
+//    } else return otwet
+//}
 
 /**
  * Очень сложная (8 баллов)

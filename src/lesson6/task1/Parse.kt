@@ -186,8 +186,7 @@ fun firstDuplicateIndex(str: String): Int {
     val list: List<String> = word.split(" ").toList()
     var i = 0
     var result = 0
-    if (list.size == 2 && list[0] == list[1]) return 0
-    if (list.size > 2) {
+    if (list.size > 1) {
         while (list[i] != list[i + 1]) {
             result += list[i].count() + 1
             i += 1

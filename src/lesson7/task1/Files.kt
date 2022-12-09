@@ -3,6 +3,8 @@
 package lesson7.task1
 
 import java.io.File
+import java.util.*
+
 
 // Урок 7: работа с файлами
 // Урок интегральный, поэтому его задачи имеют сильно увеличенную стоимость
@@ -63,7 +65,17 @@ fun alignFile(inputName: String, lineLength: Int, outputName: String) {
  * Подчёркивание в середине и/или в конце строк значения не имеет.
  */
 fun deleteMarked(inputName: String, outputName: String) {
-    TODO()
+    val writer = File(outputName).bufferedWriter()
+    for (line in File(inputName).readLines()) {
+        if (line.isNotEmpty()) {
+            writer.newLine()
+        } else
+            if (line.first() != '_') {
+                writer.write(line)
+                writer.newLine()
+            }
+    }
+    writer.close()
 }
 
 /**
@@ -76,6 +88,23 @@ fun deleteMarked(inputName: String, outputName: String) {
  *
  */
 fun countSubstrings(inputName: String, substrings: List<String>): Map<String, Int> = TODO()
+//    val input = inputName.lowercase(Locale.getDefault())
+//    val a = File(input).bufferedReader()
+//    val map = mutableMapOf<String, Int>()
+//    a.forEachLine {
+//        var o = 0
+//        while (o <= substrings.size) {
+//            if (substrings[o] == it) {
+//                if (it in map) {
+//                    map[it] += 1
+//                } else map[it] = 1
+//                o += 1
+//            } else o += 1
+//        }
+//    }
+//    a.close()
+//    return map
+//}
 
 
 /**
@@ -113,7 +142,20 @@ fun sibilants(inputName: String, outputName: String) {
  *
  */
 fun centerFile(inputName: String, outputName: String) {
-    TODO()
+    val writer = File(outputName).bufferedWriter()
+    var sizemax = ""
+    File(inputName).forEachLine {
+        if (it.count() > sizemax.count()) sizemax = it.trim()
+    }
+    File(inputName).forEachLine {
+        if ((sizemax.count() - it.trim().count()) % 2 == 0) {
+            writer.write(it.padStart((sizemax.count() / 2 + it.trim().count() / 2) + 1))
+        } else {
+            writer.write(it.padStart((sizemax.count() / 2 + it.trim().count() / 2)))
+        }
+        writer.newLine()
+    }
+    writer.close()
 }
 
 /**
@@ -204,7 +246,7 @@ fun top20Words(inputName: String): Map<String, Int> = TODO()
  *
  * Обратите внимание: данная функция не имеет возвращаемого значения
  */
-fun transliterate(inputName: String, dictionary: Map<Char, String>, outputName: String) {
+fun transliterate(inputName: String, dictionary: Map<Char, String>, outputName: String) { // !!!!!!!!!!!!!!
     TODO()
 }
 
@@ -235,6 +277,28 @@ fun transliterate(inputName: String, dictionary: Map<Char, String>, outputName: 
 fun chooseLongestChaoticWord(inputName: String, outputName: String) {
     TODO()
 }
+//    val writer = File(outputName).bufferedWriter()
+//    val list = mutableListOf<String>()
+//    var a = mutableListOf<String>()
+//    var kkkkkkk = mutableListOf<String>()
+//    File(inputName).forEachLine {
+//        var word = it.lowercase(Locale.getDefault())
+//        while (word[0] !in word.substring(1) || word.count() != 1) {
+//            word = word.substring(1)
+//            if (word[0] in word.substring(1)) {
+//                list.add(it)
+//                break
+//            }
+//        }
+//    }
+//    a = (list - list.max()) as MutableList<String>
+//    if (list.max().count() != a.max().count()) return writer.write(list.max())
+//    else while (a.max().count() == ((a - a.max()).max()).count()) {
+//        kkkkkkk.add(a.max())
+//        a = (a - a.max()) as MutableList<String>
+//    }
+//    writer.close()
+//}
 
 /**
  * Сложная (22 балла)
