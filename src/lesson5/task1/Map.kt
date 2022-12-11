@@ -118,7 +118,14 @@ fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> {
  *   containsIn(mapOf("a" to "z"), mapOf("a" to "z", "b" to "sweet")) -> true
  *   containsIn(mapOf("a" to "z"), mapOf("a" to "zee", "b" to "sweet")) -> false
  */
-fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean = !(b + a != b && a + b != a)
+fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean {
+    var s = 0
+    for (i in a) {
+        if (a[i.key] != b[i.key]) return false
+        else s += 1
+    }
+    return s == b.size || s == a.size
+}
 
 
 /**
@@ -135,10 +142,7 @@ fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean = !(b + 
  *   subtractOf(a = mutableMapOf("a" to "z"), mapOf("a" to "z"))
  *     -> a changes to mutableMapOf() aka becomes empty
  */
-fun subtractOf(a: MutableMap<String, String>, b: Map<String, String>) {
-    TODO()
-}
-
+fun subtractOf(a: MutableMap<String, String>, b: Map<String, String>): Nothing = TODO()
 /**
  * Простая (2 балла)
  *
@@ -295,25 +299,23 @@ fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<Stri
  *   findSumOfTwo(listOf(1, 2, 3), 4) -> Pair(0, 2)
  *   findSumOfTwo(listOf(1, 2, 3), 6) -> Pair(-1, -1)
  */
-fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> = TODO()
-//    var i = 0
-//    var a = 1
-//    var mutlist = mutableListOf<Int>()
-//    while (list[i] + list[a] != number || i < list.size - 1) {
-//        if (a < list.size - 1) a += 1
-//        else {
-//            a = 0
-//            i += 1
-//        }
-//    }
-//    var otwet = -1 to -1
-//    if (list[i] + list[a] == number) {
-//        mutlist.add(list[a], list[i])
-//        mutlist = mutlist.sorted() as MutableList<Int>
-//        otwet = mutlist[0] to mutlist [1]
-//        return otwet
-//    } else return otwet
-//}
+fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
+    var a = 0
+    var b = 1
+    if (list.isEmpty()) return -1 to -1
+    while ((list[a] + list[b] != number && a != b) || a != list.size - 1) {
+        b += 1
+        if (b == list.size) {
+            a += 1
+            b = 0
+        }
+    }
+    if (list[a] + list[b] == number && a != b) {
+        if (a > b) return b to a
+        else return a to b
+    }
+    else return -1 to -1
+}
 
 /**
  * Очень сложная (8 баллов)

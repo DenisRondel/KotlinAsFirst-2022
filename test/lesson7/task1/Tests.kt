@@ -4,6 +4,9 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 import java.io.File
+import java.io.BufferedWriter
+import lesson4.task1.convert
+import lesson3.task1.digitNumber
 
 class Tests {
 

@@ -67,7 +67,7 @@ fun alignFile(inputName: String, lineLength: Int, outputName: String) {
 fun deleteMarked(inputName: String, outputName: String) {
     val writer = File(outputName).bufferedWriter()
     for (line in File(inputName).readLines()) {
-        if (line.isNotEmpty()) {
+        if (line.isEmpty()) {
             writer.newLine()
         } else
             if (line.first() != '_') {
@@ -144,16 +144,22 @@ fun sibilants(inputName: String, outputName: String) {
 fun centerFile(inputName: String, outputName: String) {
     val writer = File(outputName).bufferedWriter()
     var sizemax = ""
+    var test = 0
     File(inputName).forEachLine {
         if (it.count() > sizemax.count()) sizemax = it.trim()
+        test += 1
     }
-    File(inputName).forEachLine {
-        if ((sizemax.count() - it.trim().count()) % 2 == 0) {
-            writer.write(it.padStart((sizemax.count() / 2 + it.trim().count() / 2) + 1))
-        } else {
-            writer.write(it.padStart((sizemax.count() / 2 + it.trim().count() / 2)))
+    if (test == 1) {
+        writer.write(sizemax)
+    } else {
+        File(inputName).forEachLine {
+            if ((sizemax.count() - it.trim().count()) % 2 == 0) {
+                writer.write(it.padStart((sizemax.count() / 2 + it.trim().count() / 2) + 1))
+            } else {
+                writer.write(it.padStart((sizemax.count() / 2 + it.trim().count() / 2)))
+            }
+            writer.newLine()
         }
-        writer.newLine()
     }
     writer.close()
 }
@@ -275,30 +281,29 @@ fun transliterate(inputName: String, dictionary: Map<Char, String>, outputName: 
  * Обратите внимание: данная функция не имеет возвращаемого значения
  */
 fun chooseLongestChaoticWord(inputName: String, outputName: String) {
-    TODO()
+    val writer = File(outputName).bufferedWriter()
+    val list = mutableListOf<String>()
+    File(inputName).forEachLine {
+        var word = it.lowercase()
+        var i = 1
+        while ((word[0] !in word.substring(1))) {
+            word = word.substring(1)
+            i += 1
+            if (i == it.count()) break
+        }
+        if (i == it.count()) list.add(it)
+    }
+    var answer = mutableListOf<String>()
+    answer.add(list.max())
+    if (list.size > 1) {
+        while (list.max().count() == (list - list.max()).max().count()) {
+            list -= list.max()
+            answer.add(list.max())
+        }
+    }
+    writer.write((((answer.reversed()).toString()).replace("[", "")).replace("]", "")) // простите пожалуйста за это
+    writer.close()
 }
-//    val writer = File(outputName).bufferedWriter()
-//    val list = mutableListOf<String>()
-//    var a = mutableListOf<String>()
-//    var kkkkkkk = mutableListOf<String>()
-//    File(inputName).forEachLine {
-//        var word = it.lowercase(Locale.getDefault())
-//        while (word[0] !in word.substring(1) || word.count() != 1) {
-//            word = word.substring(1)
-//            if (word[0] in word.substring(1)) {
-//                list.add(it)
-//                break
-//            }
-//        }
-//    }
-//    a = (list - list.max()) as MutableList<String>
-//    if (list.max().count() != a.max().count()) return writer.write(list.max())
-//    else while (a.max().count() == ((a - a.max()).max()).count()) {
-//        kkkkkkk.add(a.max())
-//        a = (a - a.max()) as MutableList<String>
-//    }
-//    writer.close()
-//}
 
 /**
  * Сложная (22 балла)
