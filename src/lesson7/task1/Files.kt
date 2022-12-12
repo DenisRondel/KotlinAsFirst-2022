@@ -283,25 +283,27 @@ fun transliterate(inputName: String, dictionary: Map<Char, String>, outputName: 
 fun chooseLongestChaoticWord(inputName: String, outputName: String) {
     val writer = File(outputName).bufferedWriter()
     val list = mutableListOf<String>()
-    File(inputName).forEachLine {
-        var word = it.lowercase()
-        var i = 1
-        while ((word[0] !in word.substring(1))) {
-            word = word.substring(1)
-            i += 1
-            if (i == it.count()) break
+    if (inputName.isNotEmpty()) {
+        File(inputName).forEachLine {
+            var word = it.lowercase()
+            var i = 1
+            while ((word[0] !in word.substring(1))) {
+                word = word.substring(1)
+                i += 1
+                if (i == it.count()) break
+            }
+            if (i == it.count()) list.add(it)
         }
-        if (i == it.count()) list.add(it)
-    }
-    var answer = mutableListOf<String>()
-    answer.add(list.max())
-    if (list.size > 1) {
-        while (list.max().count() == (list - list.max()).max().count()) {
-            list -= list.max()
-            answer.add(list.max())
+        var answer = mutableListOf<String>()
+        answer.add(list.max())
+        if (list.size > 1) {
+            while (list.max().count() == (list - list.max()).max().count()) {
+                list -= list.max()
+                answer.add(list.max())
+            }
         }
-    }
-    writer.write((((answer.reversed()).toString()).replace("[", "")).replace("]", "")) // простите пожалуйста за это
+        writer.write((((answer.reversed()).toString()).replace("[", "")).replace("]", "")) // простите пожалуйста за это
+    } else writer.write("")
     writer.close()
 }
 
