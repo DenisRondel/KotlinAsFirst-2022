@@ -154,9 +154,9 @@ fun centerFile(inputName: String, outputName: String) {
     } else {
         File(inputName).forEachLine {
             if ((sizemax.count() - it.trim().count()) % 2 == 0) {
-                writer.write(it.padStart((sizemax.count() / 2 + it.trim().count() / 2) + 1))
+                writer.write(it.padStart(sizemax.count() / 2 + it.trim().count() / 2 + 1))
             } else {
-                writer.write(it.padStart((sizemax.count() / 2 + it.trim().count() / 2)))
+                writer.write(it.padStart(sizemax.count() / 2 + it.trim().count() / 2))
             }
             writer.newLine()
         }
@@ -283,20 +283,24 @@ fun transliterate(inputName: String, dictionary: Map<Char, String>, outputName: 
 fun chooseLongestChaoticWord(inputName: String, outputName: String) {
     val writer = File(outputName).bufferedWriter()
     val list = mutableListOf<String>()
-    var oko = ""
-    File(inputName).forEachLine {
-        oko += it
-    }
-    if (inputName.isNotEmpty() || oko.replace(" ", "") == "") {
+    var test = 0
+    if (inputName.isNotEmpty()) {
         File(inputName).forEachLine {
             var word = it.lowercase()
             var i = 1
-            while ((word[0] !in word.substring(1))) {
-                word = word.substring(1)
-                i += 1
-                if (i == it.count()) break
+            if (it.isNotEmpty()) {
+                test += 1
+                while ((word[0] !in word.substring(1))) {
+                    word = word.substring(1)
+                    i += 1
+                    if (i == it.count()) break
+                }
             }
             if (i == it.count()) list.add(it)
+        }
+        if (test == 0) {
+            writer.write("")
+            writer.close()
         }
         var answer = mutableListOf<String>()
         answer.add(list.max())
