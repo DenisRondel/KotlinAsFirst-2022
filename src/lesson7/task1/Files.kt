@@ -214,34 +214,34 @@ fun alignFileByWidth(inputName: String, outputName: String) {
  * Ключи в ассоциативном массиве должны быть в нижнем регистре.
  *
  */
-fun top20Words(inputName: String): Map<String, Int> {
-    val list = mutableListOf<String>()
-    val regex = Regex("""[^A-Za-zA-Яа-яЁё]""")
-    var map = mutableMapOf<String, Int>()
-    var answer = mutableMapOf<String, Int?>()
-    File(inputName).forEachLine {
-        list += it.split(regex)
-    }
-    for (word in list) {
-        if (word.isNotEmpty()) {
-            if (word !in map) {
-                map[word] = 1
-            } else {
-                map[word] = map[word]!! + 1
-            }
-        }
-    }
-    if (map.size <= 20) return map
-    else {
-        for ((key, value) in map) {
-            while (map.size != 20)
-            if (value <= 20) {
-                map.remove(key)
-            }
-        }
-    }
-    return map
-}
+fun top20Words(inputName: String): Map<String, Int> = TODO()
+//    val list = mutableListOf<String>()
+//    val regex = Regex("""[^A-Za-zA-Яа-яЁё]""")
+//    var map = mutableMapOf<String, Int>()
+//    var answer = mutableMapOf<String, Int?>()
+//    File(inputName).forEachLine {
+//        list += it.split(regex)
+//    }
+//    for (word in list) {
+//        if (word.isNotEmpty()) {
+//            if (word !in map) {
+//                map[word] = 1
+//            } else {
+//                map[word] = map[word]!! + 1
+//            }
+//        }
+//    }
+//    if (map.size <= 20) return map
+//    else {
+//        for ((key, value) in map) {
+//            while (map.size != 20)
+//            if (value <= 20) {
+//                map.remove(key)
+//            }
+//        }
+//    }
+//    return map
+//}
 
 /**
  * Средняя (14 баллов)
@@ -309,7 +309,7 @@ fun transliterate(inputName: String, dictionary: Map<Char, String>, outputName: 
 fun chooseLongestChaoticWord(inputName: String, outputName: String) {
     val writer = File(outputName).bufferedWriter()
     val list = mutableListOf<String>()
-    if (inputName.isNotEmpty()) {
+    if (File(inputName).readLines().isNotEmpty()) {
         File(inputName).forEachLine {
             var word = it.lowercase()
             var i = 1
