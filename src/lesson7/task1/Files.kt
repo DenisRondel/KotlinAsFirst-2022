@@ -214,33 +214,34 @@ fun alignFileByWidth(inputName: String, outputName: String) {
  * Ключи в ассоциативном массиве должны быть в нижнем регистре.
  *
  */
-fun top20Words(inputName: String): Map<String, Int> = TODO()
-//    val list = mutableListOf<String>()
-//    val regex = Regex("""[^A-Za-zA-Яа-яЁё]""")
-//    var map = mutableMapOf<String, Int>()
-//    var answer = mutableMapOf<String, Int?>()
-//    File(inputName).forEachLine {
-//        list += it.split(regex)
-//    }
-//    for (word in list) {
-//        if (word.isNotEmpty()) {
-//            if (word !in map) {
-//                map[word] = 1
-//            } else {
-//                map[word] = map[word]!! + 1
-//            }
-//        }
-//    }
-//    if (map.size <= 20) return map
-//    else {
-//        for ((key, value) in map) {
-//            while (map.size != 20)
-//            if (value <= 20) {
-//                map.remove(key)
-//            }
-//        }
-//    }
-//}
+fun top20Words(inputName: String): Map<String, Int> {
+    val list = mutableListOf<String>()
+    val regex = Regex("""[^A-Za-zA-Яа-яЁё]""")
+    var map = mutableMapOf<String, Int>()
+    var answer = mutableMapOf<String, Int?>()
+    File(inputName).forEachLine {
+        list += it.split(regex)
+    }
+    for (word in list) {
+        if (word.isNotEmpty()) {
+            if (word !in map) {
+                map[word] = 1
+            } else {
+                map[word] = map[word]!! + 1
+            }
+        }
+    }
+    if (map.size <= 20) return map
+    else {
+        for ((key, value) in map) {
+            while (map.size != 20)
+            if (value <= 20) {
+                map.remove(key)
+            }
+        }
+    }
+    return map
+}
 
 /**
  * Средняя (14 баллов)
@@ -308,13 +309,11 @@ fun transliterate(inputName: String, dictionary: Map<Char, String>, outputName: 
 fun chooseLongestChaoticWord(inputName: String, outputName: String) {
     val writer = File(outputName).bufferedWriter()
     val list = mutableListOf<String>()
-    var test = 0
     if (inputName.isNotEmpty()) {
         File(inputName).forEachLine {
             var word = it.lowercase()
             var i = 1
             if (it.isNotEmpty()) {
-                test += 1
                 while ((word[0] !in word.substring(1))) {
                     word = word.substring(1)
                     i += 1
@@ -323,11 +322,11 @@ fun chooseLongestChaoticWord(inputName: String, outputName: String) {
             }
             if (i == it.count()) list.add(it)
         }
-        if (test == 0) {
+        if (list.max() == "") {
             writer.write("")
             writer.close()
         }
-        var answer = mutableListOf<String>()
+        val answer = mutableListOf<String>()
         answer.add(list.max())
         if (list.size > 1) {
             while (list.max().count() == (list - list.max()).max().count()) {
@@ -335,7 +334,7 @@ fun chooseLongestChaoticWord(inputName: String, outputName: String) {
                 answer.add(list.max())
             }
         }
-        writer.write((((answer.reversed()).toString()).replace("[", "")).replace("]", "")) // простите пожалуйста за это
+        writer.write((((answer.reversed()).toString()).replace("[", "")).replace("]", ""))
     } else writer.write("")
     writer.close()
 }
