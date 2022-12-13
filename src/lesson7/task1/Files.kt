@@ -313,13 +313,13 @@ fun chooseLongestChaoticWord(inputName: String, outputName: String) {
         File(inputName).forEachLine {
             var word = it.lowercase()
             var i = 1
-            if (it.isNotEmpty()) {
+            if (it.length > 1) {
                 while ((word[0] !in word.substring(1))) {
                     word = word.substring(1)
                     i += 1
                     if (i == it.count()) break
                 }
-            }
+            } else list.add((it))
             if (i == it.count()) list.add(it)
         }
         if (list.isEmpty()) {
