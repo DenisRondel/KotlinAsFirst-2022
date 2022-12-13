@@ -4,6 +4,7 @@ package lesson7.task1
 
 import java.io.File
 import java.util.*
+import kotlin.math.floor
 
 
 // Урок 7: работа с файлами
@@ -143,23 +144,21 @@ fun sibilants(inputName: String, outputName: String) {
  */
 fun centerFile(inputName: String, outputName: String) {
     val writer = File(outputName).bufferedWriter()
-    var sizemax = ""
-    var test = 0
+    var sizemax = 0
+    val lines = mutableListOf<String>()
     File(inputName).forEachLine {
-        if (it.count() > sizemax.count()) sizemax = it.trim()
-        test += 1
+        if (it.length > sizemax) sizemax = it.trim().length
+        lines.add(it.trim())
     }
-    if (test == 1) {
-        writer.write(sizemax)
-    } else {
-        File(inputName).forEachLine {
-            if ((sizemax.count() - it.trim().count()) % 2 == 0) {
-                writer.write(it.padStart(sizemax.count() / 2 + it.trim().count() / 2 + 1))
-            } else {
-                writer.write(it.padStart(sizemax.count() / 2 + it.trim().count() / 2))
-            }
-            writer.newLine()
+    for (line in lines) {
+        val spaces = when (line.length) {
+            0 -> sizemax / 2
+            sizemax -> 0
+            else -> floor((sizemax - line.length) / 2.0).toInt()
         }
+        val lineToAdd = " ".repeat(spaces) + line
+        writer.write(lineToAdd)
+        writer.newLine()
     }
     writer.close()
 }
@@ -216,6 +215,32 @@ fun alignFileByWidth(inputName: String, outputName: String) {
  *
  */
 fun top20Words(inputName: String): Map<String, Int> = TODO()
+//    val list = mutableListOf<String>()
+//    val regex = Regex("""[^A-Za-zA-Яа-яЁё]""")
+//    var map = mutableMapOf<String, Int>()
+//    var answer = mutableMapOf<String, Int?>()
+//    File(inputName).forEachLine {
+//        list += it.split(regex)
+//    }
+//    for (word in list) {
+//        if (word.isNotEmpty()) {
+//            if (word !in map) {
+//                map[word] = 1
+//            } else {
+//                map[word] = map[word]!! + 1
+//            }
+//        }
+//    }
+//    if (map.size <= 20) return map
+//    else {
+//        for ((key, value) in map) {
+//            while (map.size != 20)
+//            if (value <= 20) {
+//                map.remove(key)
+//            }
+//        }
+//    }
+//}
 
 /**
  * Средняя (14 баллов)
