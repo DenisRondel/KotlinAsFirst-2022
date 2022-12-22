@@ -310,7 +310,7 @@ fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
                 b = 0
             }
         }
-        if (list[a] + list[b] == number) {
+        if ((list[a] + list[b] == number) && a != b) {
             return if (a > b) b to a
             else a to b
         } else return -1 to -1
