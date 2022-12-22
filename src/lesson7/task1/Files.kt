@@ -308,9 +308,8 @@ fun transliterate(inputName: String, dictionary: Map<Char, String>, outputName: 
 fun chooseLongestChaoticWord(inputName: String, outputName: String) {
     val writer = File(outputName).bufferedWriter()
     val list = mutableListOf<String>()
-    val reader = File(inputName).bufferedReader()
     var max = 0
-    if (reader.readLines().toString().trim().isNotEmpty()) {
+    if (File(inputName).readLines().toString().trim() != "") {
         File(inputName).forEachLine {
             if (it.count() > 1) {
                 var word = it.lowercase().trim()
