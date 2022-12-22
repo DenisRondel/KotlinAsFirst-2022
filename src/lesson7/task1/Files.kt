@@ -309,7 +309,7 @@ fun chooseLongestChaoticWord(inputName: String, outputName: String) {
     val writer = File(outputName).bufferedWriter()
     val list = mutableListOf<String>()
     var max = 0
-    if (File(inputName).readLines().isNotEmpty()) {
+    if (File(inputName).readLines().isNotEmpty() || File(inputName).readLines().toString().trim().count() != 1) {
         File(inputName).forEachLine {
             if (it.count() > 1) {
                 var word = it.lowercase().trim()
