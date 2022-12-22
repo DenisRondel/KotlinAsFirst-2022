@@ -327,7 +327,7 @@ fun chooseLongestChaoticWord(inputName: String, outputName: String) {
         list -= list.max()
         answer.add(list.max())
     }
-    if (answer.isNullOrEmpty()) {
+    if (answer.max() == "") {
         writer.write("")
     } else {
         writer.write((((answer.reversed()).toString()).replace("[", "")).replace("]", ""))
