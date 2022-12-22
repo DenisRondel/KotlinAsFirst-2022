@@ -211,8 +211,8 @@ fun factorize(n: Int): List<Int> {
  */
 fun factorizeToString(n: Int): String {
     var a = factorize(n)
-    val newList: List<String> = a.map { it.toString() }
-    return newList.joinToString(separator = "*")
+    val list = a.map { it }
+    return list.joinToString(separator = "*")
 }
 
 /**

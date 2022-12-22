@@ -70,11 +70,10 @@ fun deleteMarked(inputName: String, outputName: String) {
     for (line in File(inputName).readLines()) {
         if (line.isEmpty()) {
             writer.newLine()
-        } else
-            if (line.first() != '_') {
-                writer.write(line)
-                writer.newLine()
-            }
+        } else if (line.first() != '_') {
+            writer.write(line)
+            writer.newLine()
+        }
     }
     writer.close()
 }
@@ -309,33 +308,26 @@ fun transliterate(inputName: String, dictionary: Map<Char, String>, outputName: 
 fun chooseLongestChaoticWord(inputName: String, outputName: String) {
     val writer = File(outputName).bufferedWriter()
     val list = mutableListOf<String>()
-    if (File(inputName).readLines().isNotEmpty()) {
-        File(inputName).forEachLine {
-            var word = it.lowercase()
+    var max = 0
+    File(inputName).forEachLine {
+        if (it.count() > 1) {
+            var word = it.lowercase().trim()
             var i = 1
-            if (it.length > 1) {
-                while ((word[0] !in word.substring(1))) {
-                    word = word.substring(1)
-                    i += 1
-                    if (i == it.count()) break
-                }
-            } else list.add((it))
-            if (i == it.count()) list.add(it)
-        }
-        if (list.isEmpty()) {
-            writer.write("")
-            writer.close()
-        }
-        val answer = mutableListOf<String>()
-        answer.add(list.max())
-        if (list.size >= 1) {
-            while (list.max().count() == (list - list.max()).max().count()) {
-                list -= list.max()
-                answer.add(list.max())
+            while ((word[0] !in word.substring(1))) {
+                word = word.substring(1)
+                i += 1
+                if (i == it.count()) break
             }
-        }
-        writer.write((((answer.reversed()).toString()).replace("[", "")).replace("]", ""))
-    } else writer.write("")
+            if (i == it.count()) list.add(it)
+        } else list.add(it)
+    }
+    val answer = mutableListOf<String>()
+    answer.add(list.max())
+    while (list.max().count() == (list - list.max()).max().count()) {
+        list -= list.max()
+        answer.add(list.max())
+    }
+    writer.write((((answer.reversed()).toString()).replace("[", "")).replace("]", ""))
     writer.close()
 }
 

@@ -136,6 +136,11 @@ class Tests {
     }
 
     @Test
+    fun myFun() {
+        assertEquals(1, myFun()) //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    }
+
+    @Test
     @Tag("7")
     fun computeDeviceCells() {
         assertEquals(listOf(0, 0, 0, 0, 0, 1, 1, 1, 1, 1), computeDeviceCells(10, "+>+>+>+>+", 10000))

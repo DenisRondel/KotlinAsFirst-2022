@@ -105,13 +105,8 @@ fun dateDigitToStr(digital: String): String = TODO()
 fun flattenPhoneNumber(phone: String): String = TODO()
 
 
-
-
-
-
-fun isNumber(s: String?): Boolean { // Проверка на число
-    return !s.isNullOrEmpty() && s.matches(Regex("\\d+"))
-}
+fun isNumber(s: String?): Boolean = // Проверка на число
+    s?.toIntOrNull() != null
 
 /**
  * Средняя (5 баллов)
@@ -123,16 +118,16 @@ fun isNumber(s: String?): Boolean { // Проверка на число
  * Прочитать строку и вернуть максимальное присутствующее в ней число (717 в примере).
  * При нарушении формата входной строки или при отсутствии в ней чисел, вернуть -1.
  */
-fun bestLongJump(jumps: String): Int {
-    val filter1 = jumps.replace("%", ",")
-    val filter2 = filter1.replace("-", ",")
-    val filter4 = filter2.replace(" ", "")
-    val filter3: List<String> = filter4.split(",").toList()
-    val max = filter3.max()
-    val result = max.replace(" ", "")
-    return if (isNumber(result)) result.toInt()
-    else -1
-}
+fun bestLongJump(jumps: String): Int = TODO()
+//    val filter1 = Regex[%-]
+//    val filter2 = filter1.replace("-", ",")
+//    val filter4 = filter2.replace(" ", "")
+//    val filter3: List<String> = filter4.split(",").toList()
+//    val max = filter3.max()
+//    val result = max.replace(" ", "")
+//    return if (result.toIntOrNull() != null) result.toInt()
+//    else -1
+//}
 
 /**
  * Сложная (6 баллов)
@@ -186,7 +181,7 @@ fun firstDuplicateIndex(str: String): Int {
     var result = 0
     var i = 0
     if (list.size > 1) {
-        while (list[i] != list[i + 1]) {
+        while (list[i] != list[i + 1] || i + 1 >= list.size) {
             result += list[i].count() + 1
             i += 1
             if (i + 1 >= list.size) return -1
